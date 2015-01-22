@@ -27,24 +27,24 @@ public class CarBean implements java.io.Serializable {
 		this.owner = owner;
 	}
 	
-	public void setYear (final int aYear) {
-		this.year = aYear;
+	public void setYear (final int year) {
+		this.year = year;
 	}
 	
-	public void setMake (final String aMake) {
-		this.make = aMake;
+	public void setMake (final String make) {
+		this.make = make;
 	}
 	
-	public void setModel (final String aModel) {
-		this.model = aModel;
+	public void setModel (final String model) {
+		this.model = model;
 	}
 	
-	public void setColor (final String aColor) {
-		this.color = aColor;
+	public void setColor (final String color) {
+		this.color = color;
 	}
 	
-	public void setOwner (final String anOwner) {
-		this.owner = anOwner;
+	public void setOwner (final String owner) {
+		this.owner = owner;
 	}
 	
 	public int getYear() {
