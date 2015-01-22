@@ -17,8 +17,8 @@ public class Car {
 
 		// Print the new car's properties
 		System.out.println("Someday, " + codysCar.getOwner() + " will drive a " + 
-		codysCar.getColor().toLowerCase() + " " + codysCar.getYear() + " " + codysCar.getMake() +  
-		" " + codysCar.getModel() + ".");
+				codysCar.getColor().toLowerCase() + " " + codysCar.getYear() + " " + codysCar.getMake() +  
+				" " + codysCar.getModel() + ".");
 	}
 
 }
