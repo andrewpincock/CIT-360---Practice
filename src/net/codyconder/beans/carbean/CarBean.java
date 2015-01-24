@@ -1,5 +1,7 @@
 package net.codyconder.beans.carbean;
 
+import java.util.HashMap;
+
 public class CarBean implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -25,6 +27,17 @@ public class CarBean implements java.io.Serializable {
 		this.model = model;
 		this.color = color;
 		this.owner = owner;
+	}
+	
+	// HashMap Constructor
+	public CarBean (HashMap aHashMap) {
+		long longYear = (long)aHashMap.get("year");
+		int intYear = (int) longYear;
+		this.year = intYear;
+		this.make = (String)aHashMap.get("make");
+		this.model = (String)aHashMap.get("model");
+		this.color = (String)aHashMap.get("color");
+		this.owner = (String)aHashMap.get("owner");
 	}
 	
 	public void setYear (final int year) {
