@@ -64,7 +64,7 @@ public class Car {
 
 	private static CarBean convertJsonToCar(String aFileName) {
 		File jsonFile = new File(aFileName);
-		CarBean codysJSONCar = new CarBean();
+		CarBean codysJSONCar = null;
 
 		try {
 			FileInputStream aFileStream = new FileInputStream(jsonFile);

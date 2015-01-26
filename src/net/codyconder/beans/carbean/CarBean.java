@@ -31,9 +31,7 @@ public class CarBean implements java.io.Serializable {
 	
 	// HashMap Constructor
 	public CarBean (HashMap aHashMap) {
-		long longYear = (long)aHashMap.get("year");
-		int intYear = (int) longYear;
-		this.year = intYear;
+		this.year = (int)aHashMap.get("year");
 		this.make = (String)aHashMap.get("make");
 		this.model = (String)aHashMap.get("model");
 		this.color = (String)aHashMap.get("color");
