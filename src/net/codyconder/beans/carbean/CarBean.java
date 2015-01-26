@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class CarBean implements java.io.Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private int year;
 	private String make;
 	private String model;
