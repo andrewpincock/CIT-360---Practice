@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class CarBean implements java.io.Serializable {
 	
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	private int year;
 	private String make;
 	private String model;
 	private String color;
-	private String owner;
+	private OwnerBean owner;
 	
 	// No Arg Constructor
 	public CarBean () {
@@ -17,11 +17,11 @@ public class CarBean implements java.io.Serializable {
 		this.make = "";
 		this.model = "";
 		this.color = "";
-		this.owner = "";
+		this.owner = new OwnerBean();
 	}
 	
 	// Full Constructor
-	public CarBean (int year, String make, String model, String color, String owner) {
+	public CarBean (int year, String make, String model, String color, OwnerBean owner) {
 		this.year = year;
 		this.make = make;
 		this.model = model;
@@ -30,13 +30,16 @@ public class CarBean implements java.io.Serializable {
 	}
 	
 	// HashMap Constructor
-	public CarBean (HashMap aHashMap) {
-		this.year = (int)aHashMap.get("year");
-		this.make = (String)aHashMap.get("make");
-		this.model = (String)aHashMap.get("model");
-		this.color = (String)aHashMap.get("color");
-		this.owner = (String)aHashMap.get("owner");
-	}
+	// Verify this after implementing the owner bean
+//	public CarBean (HashMap aHashMap) {
+//		this.year = (int)aHashMap.get("year");
+//		this.make = (String)aHashMap.get("make");
+//		this.model = (String)aHashMap.get("model");
+//		this.color = (String)aHashMap.get("color");
+//		this.owner.setFirstName((String)aHashMap.get("firstName"));
+//		this.owner.setLastName((String)aHashMap.get("lastName"));
+//		this.owner.setGender((String)aHashMap.get("gender"));
+//	}
 	
 	public void setYear (final int year) {
 		this.year = year;
@@ -54,8 +57,8 @@ public class CarBean implements java.io.Serializable {
 		this.color = color;
 	}
 	
-	public void setOwner (final String owner) {
-		this.owner = owner;
+	public void setOwner (final OwnerBean anOwner) {
+		this.owner = anOwner;
 	}
 	
 	public int getYear() {
@@ -74,54 +77,8 @@ public class CarBean implements java.io.Serializable {
 		return this.color;
 	}
 	
-	public String getOwner() {
+	public OwnerBean getOwner() {
 		return this.owner;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((make == null) ? 0 : make.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
-		result = prime * result + year;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CarBean other = (CarBean) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (make == null) {
-			if (other.make != null)
-				return false;
-		} else if (!make.equals(other.make))
-			return false;
-		if (model == null) {
-			if (other.model != null)
-				return false;
-		} else if (!model.equals(other.model))
-			return false;
-		if (owner == null) {
-			if (other.owner != null)
-				return false;
-		} else if (!owner.equals(other.owner))
-			return false;
-		if (year != other.year)
-			return false;
-		return true;
 	}
 	
 }
