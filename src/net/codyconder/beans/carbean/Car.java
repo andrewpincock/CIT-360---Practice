@@ -17,7 +17,7 @@ public class Car {
 
 	public static void main(String[] args) {
 		// Create an Owner
-		OwnerBean anOwner = new OwnerBean("Cody", "Conder", "male");
+		OwnerBean anOwner = new OwnerBean(1,"Cody", "Conder", "male");
 
 		// Create a CarBean
 		CarBean aCar = new CarBean(2005, "Honda", "Civic", "silver", anOwner);

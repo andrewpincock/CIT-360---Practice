@@ -1,6 +1,6 @@
 package net.codyconder.beans.carbean;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 
 public class CarBean implements java.io.Serializable {
 
