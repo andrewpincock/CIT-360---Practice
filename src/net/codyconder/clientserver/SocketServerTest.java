@@ -1,4 +1,4 @@
-package net.codyconder.beans.carbean;
+package net.codyconder.clientserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
