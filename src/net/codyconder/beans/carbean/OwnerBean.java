@@ -1,7 +1,10 @@
 package net.codyconder.beans.carbean;
 
-public class OwnerBean {
+import java.util.HashMap;
 
+public class OwnerBean implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int userId;
 	private String firstName;
 	private String lastName;
@@ -20,6 +23,15 @@ public class OwnerBean {
 		this.firstName = aFirstName;
 		this.lastName = aLastName;
 		this.gender = aGender;
+	}
+	
+	// HashMap constructor
+	public OwnerBean (HashMap<String, ?> aHashMap) {
+		long l = (long)aHashMap.get("userId");
+		this.userId = (int) l;
+		this.firstName = (String)aHashMap.get("firstName");
+		this.lastName = (String)aHashMap.get("lastName");
+		this.gender = (String)aHashMap.get("gender");
 	}
 	
 	public void setUserId(final int anId) {
