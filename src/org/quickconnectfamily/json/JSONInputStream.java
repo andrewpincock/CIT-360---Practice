@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
+//import javax.crypto.Cipher;
+//import javax.crypto.CipherInputStream;
 /**
  * The JSONInputStream class is used when you want to read JSON from any type of InputStream such
  * as a FileInputStream or a SocketInputStream.  If you want to convert JSON string to the 

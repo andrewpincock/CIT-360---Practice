@@ -28,9 +28,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
+//import javax.crypto.Cipher;
+//import javax.crypto.CipherInputStream;
+//import javax.crypto.CipherOutputStream;
 /**
  * This class contains several utility methods for generating and parsing JSON strings.  
  * Care has been taken to make these match the JavaScript JSON API as much as possible.
