@@ -1,12 +1,12 @@
 package net.codyconder.beans.carbean;
 
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
-//import java.util.HashMap;
-//
-//import org.quickconnectfamily.json.JSONInputStream;
-//import org.quickconnectfamily.json.JSONOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+
+import org.quickconnectfamily.json.JSONInputStream;
+import org.quickconnectfamily.json.JSONOutputStream;
 
 /*
  * The qcJSON library is required for this program to function.
@@ -17,7 +17,7 @@ public class Car {
 
 	public static void main(String[] args) {
 		// Create an Owner
-		OwnerBean anOwner = new OwnerBean(1,"Cody", "Conder", "male");
+		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
 
 		// Create a CarBean
 		CarBean aCar = new CarBean(2005, "Honda", "Civic", "silver", anOwner);
@@ -71,50 +71,50 @@ public class Car {
 
 		// Print from the owner bean
 		System.out
-				.println("When printed from the owner bean, the owner's name is: "
-						+ anOwner.getFirstName() + " " + anOwner.getLastName());
+		.println("When printed from the owner bean, the owner's name is: "
+				+ anOwner.getFirstName() + " " + anOwner.getLastName());
 
 		// Convert the car bean to JSON
-		// convertCarToJSON(codysCar);
-		// System.out.println("JSON File Created");
+		convertCarToJSON(aCar);
+		System.out.println("JSON File Created");
 
 		// Import the file as a new object
-		// CarBean codysJSONCar = convertJsonToCar("test.json");
+		CarBean codysJSONCar = convertJsonToCar("test.json");
 
 		// Print the car's properties as read from the JSON file
-		// System.out.println("According to the JSON file, "
-		// + codysJSONCar.getOwner() + " will drive a "
-		// + codysJSONCar.getColor().toLowerCase() + " "
-		// + codysJSONCar.getYear() + " " + codysJSONCar.getMake() + " "
-		// + codysJSONCar.getModel() + ".");
+		System.out.println("According to the JSON file, "
+				+ codysJSONCar.getOwner() + " will drive a "
+				+ codysJSONCar.getColor().toLowerCase() + " "
+				+ codysJSONCar.getYear() + " " + codysJSONCar.getMake() + " "
+				+ codysJSONCar.getModel() + ".");
 	}
 
-	// private static void convertCarToJSON(CarBean aCar) {
-	// File jsonFile = new File("test.json");
-	//
-	// try {
-	// FileOutputStream aFileStream = new FileOutputStream(jsonFile);
-	// JSONOutputStream jsonOut = new JSONOutputStream(aFileStream);
-	// jsonOut.writeObject(aCar);
-	// jsonOut.close();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
+	private static void convertCarToJSON(CarBean aCar) {
+		File jsonFile = new File("test.json");
 
-	// private static CarBean convertJsonToCar(String aFileName) {
-	// File jsonFile = new File(aFileName);
-	// CarBean codysJSONCar = null;
-	//
-	// try {
-	// FileInputStream aFileStream = new FileInputStream(jsonFile);
-	// JSONInputStream jsonIn = new JSONInputStream(aFileStream);
-	// HashMap parsedJSONMap = (HashMap) jsonIn.readObject();
-	// codysJSONCar = new CarBean(parsedJSONMap);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return codysJSONCar;
-	// }
+		try {
+			FileOutputStream aFileStream = new FileOutputStream(jsonFile);
+			JSONOutputStream jsonOut = new JSONOutputStream(aFileStream);
+			jsonOut.writeObject(aCar);
+			jsonOut.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static CarBean convertJsonToCar(String aFileName) {
+		File jsonFile = new File(aFileName);
+		CarBean codysJSONCar = null;
+
+		try {
+			FileInputStream aFileStream = new FileInputStream(jsonFile);
+			JSONInputStream jsonIn = new JSONInputStream(aFileStream);
+			HashMap parsedJSONMap = (HashMap) jsonIn.readObject();
+			//codysJSONCar = new CarBean(parsedJSONMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return codysJSONCar;
+	}
 }

@@ -12,22 +12,23 @@ import org.quickconnectfamily.json.JSONOutputStream;
 
 public class SocketClientTest {
 
-	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
+	public static void main(String[] args) throws UnknownHostException,
+			IOException, JSONException {
 		// Create an owner
-		OwnerBean anOwner = new OwnerBean(1,"Cody","Conder","male");
-		
-		Socket toServer = new Socket("127.0.0.1", 9889);
-		
+		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
+
+		Socket toServer = new Socket("localhost", 9889);
+
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
-		
+
 		outToServer.writeObject(anOwner);
-		
+
 		System.out.println(inFromServer.readObject());
-		
+
 		toServer.close();
 		System.out.println("Connection closed");
 
 	}
-
+	
 }
