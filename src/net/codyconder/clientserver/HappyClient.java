@@ -10,7 +10,7 @@ import org.quickconnectfamily.json.JSONException;
 import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
-public class SocketClientTest {
+public class HappyClient {
 
 	public static void main(String[] args) throws UnknownHostException,
 			IOException, JSONException {

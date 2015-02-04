@@ -16,7 +16,7 @@ import org.quickconnectfamily.json.JSONOutputStream;
  * The server will then crash (bang, boom).
  */
 
-public class ServerNullTest {
+public class NullClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// Create an owner
