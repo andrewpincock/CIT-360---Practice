@@ -10,6 +10,12 @@ import org.quickconnectfamily.json.JSONException;
 import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
+/* 
+ * This is the happy client.
+ * The client sends a JSON string representing a carbean.
+ * The server will convert this to a hashmap and create a carbean object on its end.
+ */
+
 public class HappyClient {
 
 	public static void main(String[] args) throws UnknownHostException,

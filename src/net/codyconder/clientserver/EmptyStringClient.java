@@ -11,12 +11,12 @@ import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
 /*
- * This tests to see what happens when we send a null to the server.
- * The server will hang until this thread is terminated.
- * The server will then crash (bang, boom).
+ * This tests to see what happens when we send an empty string to the server.
+ * The server will throw an exception (which is handled).
+ * The client will then crash (bang, boom).
  */
 
-public class NullClient {
+public class EmptyStringClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// Create an owner
@@ -28,8 +28,8 @@ public class NullClient {
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
 		System.out.println("Streams set up");
-		outToServer.writeObject(null);
-		System.out.println("Null object sent.");
+		outToServer.writeObject("");
+		System.out.println("Empty string sent");
 		System.out.println(inFromServer.readObject());
 		
 		toServer.close();

@@ -11,12 +11,13 @@ import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
 /*
- * This tests to see what happens when we send a null to the server.
- * The server will hang until this thread is terminated.
- * The server will then crash (bang, boom).
+ * This tests to see what happens when we send an array to the server.
+ * The server is expecting a JSON string representing a carbean.
+ * The client will wait 5 seconds before crashing.
+ * The server should handle this disconnect gracefully and reset.
  */
 
-public class NullClient {
+public class ArrayClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// Create an owner
@@ -28,8 +29,8 @@ public class NullClient {
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
 		System.out.println("Streams set up");
-		outToServer.writeObject(null);
-		System.out.println("Null object sent.");
+		outToServer.writeObject(145);
+		System.out.println("Integer (145) sent");
 		System.out.println(inFromServer.readObject());
 		
 		toServer.close();

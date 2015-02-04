@@ -43,6 +43,8 @@ public class SocketServer {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				System.out.println("An invalid JSON string was received. Resetting connection.");
+			} catch (ClassCastException e) {
+				System.out.println("An invalid object was received. Resetting connection.");
 			}
 
 			listeningSocket.close();

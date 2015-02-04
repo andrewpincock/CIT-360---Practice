@@ -16,7 +16,7 @@ import org.quickconnectfamily.json.JSONOutputStream;
  * The server will then crash (bang, boom).
  */
 
-public class NullClient {
+public class IntClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// Create an owner
@@ -28,8 +28,8 @@ public class NullClient {
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
 		System.out.println("Streams set up");
-		outToServer.writeObject(null);
-		System.out.println("Null object sent.");
+		outToServer.writeObject(145);
+		System.out.println("Integer (145) sent");
 		System.out.println(inFromServer.readObject());
 		
 		toServer.close();
