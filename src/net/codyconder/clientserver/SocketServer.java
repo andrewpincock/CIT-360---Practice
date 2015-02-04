@@ -26,19 +26,24 @@ public class SocketServer {
 					clientSocket.getOutputStream());
 			
 			System.out.println("Streams set up");
-			@SuppressWarnings("unchecked")
-			HashMap<String, ?> parsedJSONMap = (HashMap<String, ?>) inFromClient
-					.readObject();
-			
-			System.out.println("Object read");
-			OwnerBean theOwner = new OwnerBean(parsedJSONMap);
+			try {
+				@SuppressWarnings("unchecked")
+				HashMap<String, ?> parsedJSONMap = (HashMap<String, ?>) inFromClient
+						.readObject();
+				
+				System.out.println("Object read");
+				OwnerBean theOwner = new OwnerBean(parsedJSONMap);
 
-			String message = "The owner has been created successfully.";
+				String message = "The owner has been created successfully.";
 
-			outToClient.writeObject(message);
+				outToClient.writeObject(message);
 
-			System.out.println("The owner is " + theOwner.getFirstName() + " "
-					+ theOwner.getLastName() + ".");
+				System.out.println("The owner is " + theOwner.getFirstName() + " "
+						+ theOwner.getLastName() + ".");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				System.out.println("An invalid JSON string was received. Resetting connection.");
+			}
 
 			listeningSocket.close();
 		}

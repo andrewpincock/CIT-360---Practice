@@ -23,6 +23,7 @@ public class ServerNullTest {
 		// OwnerBean anOwner = new OwnerBean(1,"Cody","Conder","male");
 
 		Socket toServer = new Socket("127.0.0.1", 9889);
+		toServer.setSoTimeout(5000);
 		System.out.println("Connection made");
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
