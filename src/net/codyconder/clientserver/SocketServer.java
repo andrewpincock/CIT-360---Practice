@@ -64,6 +64,9 @@ public class SocketServer {
 				// This takes care of the issue if we receive something that's not an OwnerBean.
 				System.out.println("Server: An invalid object was received. Resetting connection.");
 				// At this point, we'd send an error back to the client... however, it has likely crashed.
+			} catch (NullPointerException e) {
+				// This appears to happen when we send a CarBean
+				System.out.println("Server: The server is only configured to handle OwnerBeans. Resetting connection.");
 			}
 			
 			// Close the connection with the client.
