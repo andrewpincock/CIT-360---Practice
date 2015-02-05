@@ -3,7 +3,9 @@ package net.codyconder.clientserver;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+
+import net.codyconder.beans.carbean.CarBean;
+import net.codyconder.beans.carbean.OwnerBean;
 
 import org.quickconnectfamily.json.JSONException;
 // import org.quickconnectfamily.json.JSONInputStream;
@@ -15,19 +17,17 @@ import org.quickconnectfamily.json.JSONOutputStream;
  * The client will then close the connection, thus preventing a crash.
  */
 
-public class ArrayClient {
+public class CarBeanClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// -------------------------------------------------------------------------------------- //
 		// The various println statements indicate where we are in the execution of the program.  //
 		// -------------------------------------------------------------------------------------- //
 		
-		// Create an array
-		ArrayList<String> anArray = new ArrayList<String>();
-		
-		anArray.add("Hello ");
-		anArray.add("world!");
-		
+		// The CarBean requires an OwnerBean
+		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
+		// Create a CarBean
+		CarBean aCarBean = new CarBean(1, "Honda", "Civic", "silver", anOwner);
 		// Establish a connection with the server
 		// and set a timeout so we don't sit here waiting forever (5 seconds)
 		Socket toServer = new Socket("127.0.0.1", 9889);
@@ -41,8 +41,8 @@ public class ArrayClient {
 		System.out.println("Streams set up");
 		
 		// Write our empty string to the server
-		outToServer.writeObject(anArray);
-		System.out.println("Client: Array sent");
+		outToServer.writeObject(aCarBean);
+		System.out.println("Client: CarBean sent");
 		
 		// The server won't respond until after the connection is closed
 		//System.out.println(inFromServer.readObject());
