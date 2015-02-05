@@ -19,6 +19,10 @@ import org.quickconnectfamily.json.JSONOutputStream;
 public class HappyClient {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
+		// -------------------------------------------------------------------------------------- //
+		// The various println statements indicate where we are in the execution of the program.  //
+		// -------------------------------------------------------------------------------------- //
+		
 		// Create an owner
 		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
 		
