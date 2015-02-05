@@ -12,26 +12,30 @@ import org.quickconnectfamily.json.JSONOutputStream;
 
 /* 
  * This is the happy client.
- * The client sends a JSON string representing a carbean.
- * The server will convert this to a hashmap and create a carbean object on its end.
+ * The client sends a JSON string representing an OwnerBean
+ * The server will convert this to a HashMap and create an OwnerBean object on its end.
  */
 
 public class HappyClient {
 
-	public static void main(String[] args) throws UnknownHostException,
-			IOException, JSONException {
+	public static void main(String[] args) throws UnknownHostException, IOException, JSONException {
 		// Create an owner
 		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
-
+		
+		// Open our connection with the server
 		Socket toServer = new Socket("localhost", 9889);
-
+		
+		// Set up our JSON streams so we can send and receive data
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
 		JSONOutputStream outToServer = new JSONOutputStream(toServer.getOutputStream());
-
+		
+		// Write the OwnerBean to the server
 		outToServer.writeObject(anOwner);
-
+		
+		// Print the response from the server
 		System.out.println(inFromServer.readObject());
-
+		
+		// Close the connection with the server
 		toServer.close();
 		System.out.println("Connection closed");
 
