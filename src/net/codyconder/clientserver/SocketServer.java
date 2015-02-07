@@ -14,7 +14,7 @@ import net.codyconder.beans.carbean.OwnerBean;
 /* 
  * This is a simple server.
  * It expects a JSON string and converts it to an OwnerBean.
- * The server is configured to run in an infinite loop.
+ * The server is configured to run in a loop.
  * The server is also configured to handle all the errors it has experienced through my testing so far without crashing.
  * The various client files demonstrate different things that the client could send. Most of them are not happy ;)
  */
