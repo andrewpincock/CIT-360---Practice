@@ -17,13 +17,9 @@ public class SillyHibernateUseExample {
 	private List<User> users;
 
 	public SillyHibernateUseExample() {
-		// TODO Auto-generated constructor stub
+		
 	}
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		SillyHibernateUseExample aSillyHibernateUseExample = new SillyHibernateUseExample();
 		aSillyHibernateUseExample.addNewUsers();
 		aSillyHibernateUseExample.showAllUsers();
