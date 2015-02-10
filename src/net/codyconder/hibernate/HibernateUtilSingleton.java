@@ -28,7 +28,7 @@ public class HibernateUtilSingleton
 
 		//change the next two lines of code to match your MySQL user name and password.
 
-		config.setProperty("hibernate.connection.username", "root");
+		config.setProperty("hibernate.connection.username", "java");
 
 		config.setProperty("hibernate.connection.password", "p@$$w0rd");
 
