@@ -167,7 +167,6 @@ public class SillyHibernateUseExample {
 		showAllUsers();
 	}
 	private void deleteAddedUsers() {
-		// TODO Auto-generated method stub
 		Session session = HibernateUtilSingleton.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
