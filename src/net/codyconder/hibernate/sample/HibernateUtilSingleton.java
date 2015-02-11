@@ -1,4 +1,4 @@
-package net.codyconder.hibernate;
+package net.codyconder.hibernate.sample;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

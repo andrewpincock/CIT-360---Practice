@@ -1,4 +1,4 @@
-package net.codyconder.hibernate;
+package net.codyconder.hibernate.sample;
 
 /* 
  * SillyHibernateUseExample.java source code

@@ -1,4 +1,4 @@
-package net.codyconder.hibernate;
+package net.codyconder.hibernate.sample;
 
 /*
  * The Many-To-Many relationship between User and PhoneNumber objects requires two tables
