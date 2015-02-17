@@ -1,13 +1,13 @@
 package net.codyconder.hibernate.practice;
 
-//import java.util.List;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-//import org.hibernate.Query;
 
 public class PracticeSample {
-	//private List<Car> cars;
+	private List<Car> cars;
 	
 	public PracticeSample() {
 		
@@ -16,6 +16,7 @@ public class PracticeSample {
 	public static void main(String[] args) {
 		PracticeSample aPracticeSample = new PracticeSample();
 		aPracticeSample.addNewCars();
+		aPracticeSample.showAllCars();
 	}
 	
 	private void addNewCars() {
@@ -44,6 +45,20 @@ public class PracticeSample {
 		// Print out the generated IDs
 		System.out.println("Car 1's id is " + car1.getId());
 		System.out.println("Car 2's id is " + car2.getId());
+	}
+	
+	private void showAllCars() {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		
+		Transaction transaction = session.beginTransaction();
+		
+		Query allCarsQuery = session.createQuery("select c from Car as c order by c.id");
+		
+		cars = allCarsQuery.list();
+		
+		System.out.println("Number of cars: " + cars.size());
+		
+		transaction.commit();
 	}
 
 }
