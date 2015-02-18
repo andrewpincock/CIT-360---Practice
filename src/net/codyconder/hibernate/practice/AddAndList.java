@@ -6,15 +6,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class PracticeSample {
+public class AddAndList {
 	private List<Car> cars;
 	
-	public PracticeSample() {
+	public AddAndList() {
 		
 	}
 	
 	public static void main(String[] args) {
-		PracticeSample aPracticeSample = new PracticeSample();
+		AddAndList aPracticeSample = new AddAndList();
 		aPracticeSample.addNewCars();
 		aPracticeSample.showAllCars();
 	}
