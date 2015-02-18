@@ -1,22 +1,24 @@
 package net.codyconder.hibernate.practice;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class AddAndList {
+public class CarHibernate {
 	private List<Car> cars;
 	
-	public AddAndList() {
+	public CarHibernate() {
 		
 	}
 	
 	public static void main(String[] args) {
-		AddAndList aPracticeSample = new AddAndList();
+		CarHibernate aPracticeSample = new CarHibernate();
 		aPracticeSample.addNewCars();
 		aPracticeSample.showAllCars();
+		aPracticeSample.updateCarData();
 	}
 	
 	private void addNewCars() {
@@ -47,7 +49,7 @@ public class AddAndList {
 		System.out.println("Car 2's id is " + car2.getId());
 	}
 	
-	private void showAllCars() {
+	public void showAllCars() {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		
 		Transaction transaction = session.beginTransaction();
@@ -58,7 +60,32 @@ public class AddAndList {
 		
 		System.out.println("Number of cars: " + cars.size());
 		
+		Iterator<Car> iterator = cars.iterator();;
+		while(iterator.hasNext()) {
+			Car element = iterator.next();
+			System.out.println(element.toString());
+		}
+		
 		transaction.commit();
+	}
+	
+	private void updateCarData() {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Query singleCarQuery = session.createQuery("select c from Car as c where c.model='Civic'");
+		
+		Car hondaCivic = (Car)singleCarQuery.uniqueResult();
+		
+		// Change the color
+		hondaCivic.setColor("orange");
+		
+		session.merge(hondaCivic);
+		
+		transaction.commit();
+		
+		showAllCars();
+		
 	}
 
 }
