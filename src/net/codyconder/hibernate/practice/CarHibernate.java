@@ -3,6 +3,8 @@ package net.codyconder.hibernate.practice;
 import java.util.Iterator;
 import java.util.List;
 
+import net.codyconder.hibernate.sample.HibernateUtilSingleton;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,6 +21,7 @@ public class CarHibernate {
 		aPracticeSample.addNewCars();
 		aPracticeSample.showAllCars();
 		aPracticeSample.updateCarData();
+		aPracticeSample.deleteCars();
 	}
 	
 	private void addNewCars() {
@@ -86,6 +89,24 @@ public class CarHibernate {
 		
 		showAllCars();
 		
+	}
+	
+	private void deleteCars() {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		
+		int numCars = cars.size();
+		System.out.println("Car count: "+numCars);
+		for(int i = 0; i < numCars; i++){
+			System.out.println("deleting car "+cars.get(i).getMake()+" "+cars.get(i).getModel());
+			session.delete(cars.get(i));
+		}
+		transaction.commit();
+		
+		System.out.println(cars);
+		cars.clear();
+		
+		System.out.println(cars);
 	}
 
 }
