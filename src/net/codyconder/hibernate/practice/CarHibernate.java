@@ -98,7 +98,8 @@ public class CarHibernate {
 		int numCars = cars.size();
 		System.out.println("Car count: "+numCars);
 		for(int i = 0; i < numCars; i++){
-			System.out.println("deleting car "+cars.get(i).getMake()+" "+cars.get(i).getModel());
+			System.out.println("deleting car "+cars.get(i).getMake()+" "+cars.get(i).getModel()
+					+" with ID "+cars.get(i).getId());
 			session.delete(cars.get(i));
 		}
 		transaction.commit();
@@ -106,6 +107,7 @@ public class CarHibernate {
 		System.out.println(cars);
 		cars.clear();
 		
+		System.out.println("Car objects cleared.");
 		System.out.println(cars);
 	}
 
