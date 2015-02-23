@@ -3,8 +3,6 @@ package net.codyconder.hibernate.practice;
 import java.util.Iterator;
 import java.util.List;
 
-import net.codyconder.hibernate.sample.HibernateUtilSingleton;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

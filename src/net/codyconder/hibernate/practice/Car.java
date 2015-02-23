@@ -21,6 +21,13 @@ public class Car {
 		
 	}
 	
+	public Car (String aYear, String aMake, String aModel, String aColor) {
+		this.year = aYear;
+		this.make = aMake;
+		this.model = aModel;
+		this.color = aColor;
+	}
+	
 	public String toString() {
 		return "Car: [id=" + id + ", year=" + year + ", make=" + make 
 				+ ", model=" + model + ", color=" + color + "]";
