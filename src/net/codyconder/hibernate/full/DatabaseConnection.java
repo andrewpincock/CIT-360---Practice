@@ -9,6 +9,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * This class follows the singleton pattern.
  */
 
+@SuppressWarnings("deprecation")
 public class DatabaseConnection
 
 {

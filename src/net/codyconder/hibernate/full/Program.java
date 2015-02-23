@@ -132,9 +132,9 @@ public class Program {
 		System.out.println("Car Management");
 		System.out.println("	1. Add Car");
 		System.out.println("	2. List All Cars");
-		System.out.println("	3. Remove Car");
-		System.out.println("	4. Update Car Information");
-		System.out.println("	5. List Cars Owned by an Owner");
+		System.out.println("	3. Update Car Information");
+		System.out.println("	4. List Cars Owned by an Owner");
+		System.out.println("	5. Remove Car");
 		System.out.println("	6. Return to Main Menu");
 		System.out.print("Please enter your selection (1-6): ");
 
@@ -148,15 +148,15 @@ public class Program {
 
 		switch (selection) {
 		case 1:
-
+			
 		case 2:
-
+			
 		case 3:
-
+			
 		case 4:
-
+			
 		case 5:
-
+			
 		case 6:
 			program.mainMenu();
 		default:
@@ -198,6 +198,7 @@ public class Program {
 		List<Owner> ownerList = queryAllOwners();
 		
 		System.out.println();
+		System.out.println("Owners in Database");
 		System.out.printf("%-5s%-16s%-16s%-20s\n","Id","First Name","Last Name","Gender");
 		System.out.printf("%-5s%-16s%-16s%-20s\n","--","----------","---------","------");
 		

@@ -50,6 +50,7 @@ public class CarHibernate {
 		System.out.println("Car 2's id is " + car2.getId());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void showAllCars() {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		
