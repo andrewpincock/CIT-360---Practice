@@ -1,4 +1,4 @@
-package net.codyconder.hibernate.full;
+package net.codyconder.hibernate.working;
 
 import java.util.HashSet;
 import java.util.Set;

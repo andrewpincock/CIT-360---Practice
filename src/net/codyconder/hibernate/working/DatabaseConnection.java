@@ -1,4 +1,4 @@
-package net.codyconder.hibernate.full;
+package net.codyconder.hibernate.working;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

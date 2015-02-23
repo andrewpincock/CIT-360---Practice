@@ -1,4 +1,4 @@
-package net.codyconder.hibernate.full;
+package net.codyconder.hibernate.working;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,14 +10,28 @@ import org.hibernate.Query;
 
 public class Program {
 
+	/*
+	 * Create a program object. This makes it available
+	 * to all methods within the class without having
+	 * to instantiate it each time you need it.
+	 * Same thing for the scanner - this makes it
+	 * available throughout the program without having to
+	 * create a new one each time.
+	 */
 	static Program program = new Program();
 	Scanner userInput = new Scanner(System.in);
 
+	// Program constructor
 	public Program() {
 
 	}
 
 	public static void main(String[] args) {
+		/* 
+		 * Get out of main as quickly as possible
+		 * Control of the program will flow through the
+		 * Main Menu and the sub menus.
+		 */
 		program.mainMenu();
 	}
 
@@ -39,9 +53,12 @@ public class Program {
 		System.out.println("	3. Quit application");
 		System.out.print("Please enter your selection (1-3): ");
 
+		// Attempt to read user input
 		try {
 			selection = Integer.parseInt(userInput.nextLine());
 		} catch (NumberFormatException e) {
+			// If we don't get an integer, then we need to go back
+			// and try again. We can't work with letters in this menu.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-3) to use the system.");
 			program.mainMenu();
@@ -49,14 +66,19 @@ public class Program {
 
 		switch (selection) {
 		case 1:
+			// Open the Owner Menu
 			program.ownerMenu();
 		case 2:
+			// Open the Car Menu
 			program.carMenu();
 		case 3:
+			// Exit the program
 			System.out.println();
 			System.out.println("Have a nice day!");
 			System.exit(0);
 		default:
+			// A number other than 1-3 was entered.
+			// Prompt for input again.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-3) to use the system.");
 			program.mainMenu();
@@ -81,9 +103,12 @@ public class Program {
 		System.out.println("	6. Return to Main Menu");
 		System.out.print("Please enter your selection (1-6): ");
 
+		// Attempt to read user input
 		try {
 			selection = Integer.parseInt(userInput.nextLine());
 		} catch (NumberFormatException e) {
+			// If we don't get an integer, then we need to go back
+			// and try again. We can't work with letters in this menu.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-6) to use this menu.");
 			program.ownerMenu();
@@ -114,6 +139,8 @@ public class Program {
 			// Return to the Main Menu
 			program.mainMenu();
 		default:
+			// A number other than 1-6 was entered.
+			// Prompt for input again.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-6) to use this menu.");
 			program.ownerMenu();
@@ -138,9 +165,12 @@ public class Program {
 		System.out.println("	6. Return to Main Menu");
 		System.out.print("Please enter your selection (1-6): ");
 
+		// Attempt to read user input
 		try {
 			selection = Integer.parseInt(userInput.nextLine());
 		} catch (NumberFormatException e) {
+			// If we don't get an integer, then we need to go back
+			// and try again. We can't work with letters in this menu.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-6) to use this menu.");
 			program.carMenu();
@@ -148,18 +178,31 @@ public class Program {
 
 		switch (selection) {
 		case 1:
-			
+			//Call the addCar method then return to the car menu
+			//program.addCar();
+			program.carMenu();
 		case 2:
-			
+			//Call the listAllCars method then return to the car menu
+			//program.listAllCars();
+			program.carMenu();
 		case 3:
-			
+			//Call the updateCarInformation method then return to the car menu
+			//program.updateCarInformation();
+			program.carMenu();
 		case 4:
-			
+			//Call the listOwnerCars method then return to the car menu
+			program.listOwnerCars();
+			program.carMenu();
 		case 5:
-			
+			//Call the removeCar method then return to the car menu
+			//program.removeCar();
+			program.carMenu();
 		case 6:
+			// Return to the main menu
 			program.mainMenu();
 		default:
+			// A number other than 1-6 was entered.
+			// Prompt for input again.
 			System.out.println();
 			System.out.println("Oops! Please enter a number (1-6) to use this menu.");
 			program.carMenu();
@@ -172,7 +215,9 @@ public class Program {
 	 * ****************/
 	
 	/*
-	 * Add Owner method
+	 * addOwner method
+	 * This method gathers the information for a new owner object
+	 * and then passes it to the insertOwner method for processing.
 	 */
 	private void addOwner() {
 		String firstName;
@@ -194,6 +239,12 @@ public class Program {
 		
 	}
 	
+	/* 
+	 * listOwners method
+	 * This method calls the queryAllOwners method to gather
+	 * owner information from the database.
+	 * A table is then printed and displayed to the user.
+	 */
 	private void listOwners() {
 		List<Owner> ownerList = queryAllOwners();
 		
@@ -214,6 +265,16 @@ public class Program {
 		
 	}
 	
+	/*
+	 * updateOwnerInformation
+	 * This method calls the listOwners method to display
+	 * a list of owners in the database. The user is then
+	 * prompted to enter the ID of the owner they'd like to
+	 * update. The database is then queried for that specific
+	 * user (queryOwnerByID method). The user is prompted
+	 * to update the owner information and the object is passed
+	 * to the mergeOwnerInformation method for processing. 
+	 */
 	private void updateOwnerInformation() {
 		Integer selection = null;
 		Owner ownerToUpdate;
@@ -267,6 +328,7 @@ public class Program {
 	}
 	
 	private void listOwnerCars() {
+		// TODO implement listOwnerCars method
 		System.out.println();
 		System.out.println("This method is not yet implemented. Returning to Owner Menu.");
 	}
@@ -302,9 +364,13 @@ public class Program {
 		System.out.println("Owner successfully deleted! Returning to Owner Menu.");
 	}
 
-	/* **********************
+	/* ****************************
+	 * Database Interaction Methods
+	 * ****************************/
+	
+	/*
 	 * Owner Database Methods
-	 * **********************/
+	 */
 	private void insertOwner(String firstName, String lastName, String gender) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -365,5 +431,9 @@ public class Program {
 		
 		transaction.commit();
 	}
+	
+	/*
+	 * Car Database Methods
+	 */
 
 }

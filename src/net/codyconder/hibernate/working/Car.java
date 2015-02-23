@@ -1,4 +1,4 @@
-package net.codyconder.hibernate.full;
+package net.codyconder.hibernate.working;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
