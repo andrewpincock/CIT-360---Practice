@@ -52,6 +52,7 @@ public class DatabaseConnection
 		config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
 
 		config.setProperty("hibernate.current_session_context_class", "thread");
+		
 
 		/*
 		 *  Add your classes here that you want to match your database tables
