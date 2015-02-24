@@ -88,11 +88,101 @@ public class CarManagement {
 	}
 	
 	void updateCarInformation () {
+		Integer selection = null;
+		Car carToUpdate;
 		
+		listAllCars();
+		System.out.print("Enter the ID of the car you'd like to update: ");
+		
+		try {
+			selection = Integer.parseInt(userInput.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println();
+			System.out.println("Invalid entry. Returning to Car Menu.");
+			return;
+		}
+		
+		carToUpdate = aModel.queryCarById(selection);
+		
+		if (carToUpdate == null) {
+			System.out.println();
+			System.out.println("The ID you entered is invalid. Returning to Car Menu.");
+			return;
+		}
+		
+		System.out.println();
+		System.out.println("Updating information for "+carToUpdate.getOwnerId().getFullName()
+				+"'s "+carToUpdate.getYear()+" "+carToUpdate.getMake()+" "+carToUpdate.getModel());
+		System.out.println("To leave the information the same, leave the field blank and press enter.");
+		
+		System.out.print("Year: ");
+		String year = userInput.nextLine();
+		System.out.print("Make: ");
+		String make = userInput.nextLine();
+		System.out.print("Model: ");
+		String model = userInput.nextLine();
+		System.out.print("Color: ");
+		String color = userInput.nextLine();
+		
+		if(!year.isEmpty()) {
+			carToUpdate.setYear(year);
+		}
+		if(!make.isEmpty()) {
+			carToUpdate.setMake(make);
+		}
+		if(!model.isEmpty()) {
+			carToUpdate.setModel(model);
+		}
+		if(!color.isEmpty()) {
+			carToUpdate.setColor(color);
+		}
+		
+		System.out.println("Updating vehicle information.");
+		aModel.mergeCarInformation(carToUpdate);
+		
+		System.out.println("Information successfully updated! Returning to Car Menu.");
 	}
 	
 	void removeCar () {
+		Integer selection = null;
+		String confirmation = null;
+		Car carToRemove;
 		
+		listAllCars();
+		System.out.println("Removing a car will also remove any maintenance records associated with it.");
+		System.out.println("WARNING: This action cannot be undone!");
+		System.out.print("Enter the ID of the car you'd like to remove: ");
+		
+		try {
+			selection = Integer.parseInt(userInput.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println();
+			System.out.println("Invalid Entry. Returning to Car Menu.");
+			return;
+		}
+		
+		carToRemove = aModel.queryCarById(selection);
+		
+		if (carToRemove == null) {
+			System.out.println();
+			System.out.println("The ID you entered is invalid. Returning to Car Menu.");
+			return;
+		}
+		
+		System.out.print("Are you sure you want to remove "+carToRemove.getOwnerId().getFullName()
+				+"'s "+carToRemove.getMake()+" "+carToRemove.getModel()+"from the database? (y/n): ");
+		
+		confirmation = userInput.nextLine();
+		
+		if (confirmation.equalsIgnoreCase("Y")) {
+			System.out.println("Removing "+carToRemove.getOwnerId().getFullName()+"'s "
+					+carToRemove.getMake()+" "+carToRemove.getModel());
+			aModel.deleteCarFromDatabase(carToRemove);
+			System.out.println("Car successfully deleted!");
+		} else if (confirmation.equalsIgnoreCase("N")) {
+			System.out.println(carToRemove.getOwnerId().getFullName()+"'s "
+					+carToRemove.getMake()+" "+carToRemove.getModel()+" not removed from database.");
+		}
 	}
 	
 }

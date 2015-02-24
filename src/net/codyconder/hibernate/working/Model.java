@@ -97,4 +97,54 @@ public class Model {
 		transaction.commit();
 		return carsList;
 	}
+	
+	Car queryCarById(Integer anId) {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+
+		Query singleCarQuery = session.createQuery("Select c from Car as c where c.id = :anId");
+		singleCarQuery.setParameter("anId", anId);
+
+		Car singleCar = (Car) singleCarQuery.uniqueResult();
+
+		transaction.commit();
+
+		return singleCar;
+	}
+	
+	void mergeCarInformation(Car aCarToUpdate) {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+
+		Query singleCarUpdate = session.createQuery("Select c from Car as c where c.id = :anId");
+		singleCarUpdate.setParameter("anId", aCarToUpdate.getId());
+
+		session.merge(aCarToUpdate);
+
+		transaction.commit();
+	}
+	
+	List<Car> queryCarsByOwner(Owner anOwner) {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Query carsListQuery = session.createQuery("Select c from Car as c where c.ownerMapping = :anOwner");
+		carsListQuery.setParameter("anOwner", anOwner);
+		
+		@SuppressWarnings("unchecked")
+		List<Car> carsList = carsListQuery.list();
+		
+		transaction.commit();
+		
+		return carsList;
+	}
+	
+	void deleteCarFromDatabase(Car aCarToDelete) {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+
+		session.delete(aCarToDelete);
+
+		transaction.commit();
+	}
 }

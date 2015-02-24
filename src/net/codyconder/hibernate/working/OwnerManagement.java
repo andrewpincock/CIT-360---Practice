@@ -1,3 +1,4 @@
+
 package net.codyconder.hibernate.working;
 
 import java.util.Iterator;
@@ -81,8 +82,8 @@ public class OwnerManagement {
 	void updateOwnerInformation() {
 		Integer selection = null;
 		Owner ownerToUpdate;
-		listOwners();
 		
+		listOwners();
 		System.out.print("Enter the ID of the owner you'd like to update: ");
 		
 		try {
@@ -136,9 +137,40 @@ public class OwnerManagement {
 	 * and the method lists all cars owned by that owner.
 	 */
 	void listOwnerCars() {
-		// TODO implement listOwnerCars method
+		Integer selection = null;
+		Owner theOwner;
+		
+		listOwners();
+		System.out.print("Enter the ID of the owner: ");
+		
+		try {
+			selection = Integer.parseInt(userInput.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println();
+			System.out.println("Invalid Entry. Returning to previous menu.");
+			return;
+		}
+		
+		theOwner = model.queryOwnerById(selection);
+		System.out.println("Retrieving "+theOwner.getFullName()+"'s cars.");
+		
+		List<Car> listOfCars = model.queryCarsByOwner(theOwner);
+		
 		System.out.println();
-		System.out.println("This method is not yet implemented. Returning to Owner Menu.");
+		System.out.println("Cars in Database");
+		System.out.printf("%-5s%-20s%-7s%-16s%-18s%-16s\n","ID","Owner","Year","Make","Model","Color");
+		System.out.printf("%-5s%-20s%-7s%-16s%-18s%-16s\n","--","-----","----","----","-----","-----");
+		
+		Iterator<Car> carIterator = listOfCars.iterator();
+		
+		while(carIterator.hasNext()) {
+			
+			Car element = carIterator.next();
+			System.out.printf("%-5s%-20s%-7s%-18s%-16s%-16s\n",element.getId(),element.getOwnerId().getFullName(),
+					element.getYear(),element.getMake(),element.getModel(),element.getColor());
+		}
+		
+		
 	}
 	
 	/*
@@ -151,8 +183,8 @@ public class OwnerManagement {
 		Integer selection = null;
 		String confirmation = null;
 		Owner ownerToRemove;
-		listOwners();
 		
+		listOwners();
 		System.out.println("Removing an owner will also remove all their cars.");
 		System.out.println("WARNING: This action cannot be undone!");
 		System.out.print("Enter the ID of the owner you'd like to remove: ");
