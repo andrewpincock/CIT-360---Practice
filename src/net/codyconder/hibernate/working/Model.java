@@ -7,21 +7,24 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class Model {
+	
+	public Model () {
+		
+	}
+	
 	/*
 	 * Owner Database Methods
 	 */
-	public void insertOwner(String firstName, String lastName, String gender) {
+	void insertOwner(Owner ownerToInsert) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
-		Owner newOwner = new Owner(firstName, lastName, gender);
-
-		session.save(newOwner);
+		session.save(ownerToInsert);
 
 		transaction.commit();
 	}
 
-	public List<Owner> queryAllOwners() {
+	List<Owner> queryAllOwners() {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -35,7 +38,7 @@ public class Model {
 		return ownersList;
 	}
 
-	public Owner queryOwnerById(Integer anId) {
+	Owner queryOwnerById(Integer anId) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -49,7 +52,7 @@ public class Model {
 		return singleOwner;
 	}
 
-	public void mergeOwnerInformation(Owner anOwnerToUpdate) {
+	void mergeOwnerInformation(Owner anOwnerToUpdate) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -61,7 +64,7 @@ public class Model {
 		transaction.commit();
 	}
 
-	public void deleteOwnerFromDatabase(Owner anOwnerToDelete) {
+	void deleteOwnerFromDatabase(Owner anOwnerToDelete) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -73,4 +76,25 @@ public class Model {
 	/*
 	 * Car Database Methods
 	 */
+	void insertCar(Car carToInsert) {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+
+		session.save(carToInsert);
+
+		transaction.commit();
+	}
+	
+	List<Car> queryAllCars() {
+		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Query carsQuery = session.createQuery("Select c from Car as c");
+		
+		@SuppressWarnings("unchecked")
+		List<Car> carsList = carsQuery.list();
+		
+		transaction.commit();
+		return carsList;
+	}
 }
