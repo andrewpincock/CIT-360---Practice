@@ -1,5 +1,0 @@
-package net.codyconder.hibernate.cardatabase;
-
-public class Controller {
-
-}

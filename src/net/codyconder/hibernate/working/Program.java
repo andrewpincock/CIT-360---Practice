@@ -4,10 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.Query;
-
 public class Program {
 
 	/*
@@ -19,6 +15,7 @@ public class Program {
 	 * create a new one each time.
 	 */
 	static Program program = new Program();
+	Model model = new Model();
 	Scanner userInput = new Scanner(System.in);
 
 	// Program constructor
@@ -28,7 +25,6 @@ public class Program {
 
 	public static void main(String[] args) {
 		/* 
-		 * Get out of main as quickly as possible
 		 * Control of the program will flow through the
 		 * Main Menu and the sub menus.
 		 */
@@ -233,7 +229,7 @@ public class Program {
 		gender = userInput.nextLine();
 		
 		System.out.println("Adding "+firstName+" "+lastName+" to the database.");
-		program.insertOwner(firstName, lastName, gender);
+		model.insertOwner(firstName, lastName, gender);
 		
 		System.out.println(firstName+" "+lastName+" successfully added!");
 		
@@ -246,7 +242,7 @@ public class Program {
 	 * A table is then printed and displayed to the user.
 	 */
 	private void listOwners() {
-		List<Owner> ownerList = queryAllOwners();
+		List<Owner> ownerList = model.queryAllOwners();
 		
 		System.out.println();
 		System.out.println("Owners in Database");
@@ -290,7 +286,7 @@ public class Program {
 			program.updateOwnerInformation();
 		}
 		
-		ownerToUpdate = queryOwnerById(selection);
+		ownerToUpdate = model.queryOwnerById(selection);
 		
 		if (ownerToUpdate == null) {
 			System.out.println();
@@ -299,8 +295,7 @@ public class Program {
 		}
 		
 		System.out.println();
-		System.out.println("Updating "+ownerToUpdate.getFirstName()+" "
-				+ownerToUpdate.getLastName()+"'s information.");
+		System.out.println("Updating "+ownerToUpdate.getFullName()+"'s information.");
 		System.out.println("To leave the information the same, leave the field blank and press enter.");
 		
 		System.out.print("First Name: ");
@@ -320,21 +315,34 @@ public class Program {
 			ownerToUpdate.setGender(gender);
 		}
 		
-		System.out.println("Updating information for "+ownerToUpdate.getFirstName()+" "+ownerToUpdate.getLastName());
-		program.mergeOwnerInformation(ownerToUpdate);
+		System.out.println("Updating information for "+ownerToUpdate.getFullName());
+		model.mergeOwnerInformation(ownerToUpdate);
 		
 		System.out.println("Information successfully updated! Returning to Owner Menu.");
 		
 	}
 	
+	/*
+	 * listOwnerCars
+	 * This method starts by listing the owners in the database.
+	 * The user is then prompted to select one of the owners,
+	 * and the method lists all cars owned by that owner.
+	 */
 	private void listOwnerCars() {
 		// TODO implement listOwnerCars method
 		System.out.println();
 		System.out.println("This method is not yet implemented. Returning to Owner Menu.");
 	}
 	
+	/*
+	 * removeOwner
+	 * This method removes an owner from the database.
+	 * We start by listing the owners in the database
+	 * and prompting the user to select one of the owners.
+	 */
 	private void removeOwner() {
 		Integer selection = null;
+		String confirmation = null;
 		Owner ownerToRemove;
 		program.listOwners();
 		
@@ -350,7 +358,7 @@ public class Program {
 			program.removeOwner();
 		}
 		
-		ownerToRemove = queryOwnerById(selection);
+		ownerToRemove = model.queryOwnerById(selection);
 		
 		if (ownerToRemove == null) {
 			System.out.println();
@@ -358,82 +366,21 @@ public class Program {
 			program.ownerMenu();
 		}
 		
-		System.out.println("Removing owner "+ownerToRemove.getFirstName()+" "+ownerToRemove.getLastName());
-		program.deleteOwnerFromDatabase(ownerToRemove);
+		System.out.print("Are you sure you want to remove "+ownerToRemove.getFullName()
+				+" from the database? (y/n): ");
 		
-		System.out.println("Owner successfully deleted! Returning to Owner Menu.");
-	}
-
-	/* ****************************
-	 * Database Interaction Methods
-	 * ****************************/
-	
-	/*
-	 * Owner Database Methods
-	 */
-	private void insertOwner(String firstName, String lastName, String gender) {
-		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
+		confirmation = userInput.nextLine();
 		
-		Owner newOwner = new Owner(firstName, lastName, gender);
+		if (confirmation.equalsIgnoreCase("Y")) {
+			System.out.println("Removing owner "+ownerToRemove.getFullName());
+			model.deleteOwnerFromDatabase(ownerToRemove);
+			System.out.println("Owner successfully deleted!");
+		} else if (confirmation.equalsIgnoreCase("N")) {
+			System.out.println(ownerToRemove.getFullName()+" not removed from database.");
+		}
 		
-		session.save(newOwner);
-		
-		transaction.commit();
+		System.out.println("Returning to Owner Menu.");
 		
 	}
-	
-	private List<Owner> queryAllOwners() {
-		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		
-		Query ownersQuery = session.createQuery("Select o from Owner as o");
-		
-		@SuppressWarnings("unchecked")
-		List<Owner> ownersList = ownersQuery.list();
-		
-		transaction.commit();
-		
-		return ownersList;
-	}
-	
-	private Owner queryOwnerById(Integer anId) {
-		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		
-		Query singleOwnerQuery = session.createQuery("Select o from Owner as o where o.id = :anId");
-		singleOwnerQuery.setParameter("anId", anId);
-		
-		Owner singleOwner = (Owner)singleOwnerQuery.uniqueResult();
-		
-		transaction.commit();
-		
-		return singleOwner;
-	}
-	
-	private void mergeOwnerInformation (Owner anOwnerToUpdate) {
-		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		
-		Query singleOwnerUpdate = session.createQuery("Select o from Owner as o where o.id = :anId");
-		singleOwnerUpdate.setParameter("anId", anOwnerToUpdate.getId());
-		
-		session.merge(anOwnerToUpdate);
-		
-		transaction.commit();
-	}
-	
-	private void deleteOwnerFromDatabase(Owner anOwnerToDelete) {
-		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		
-		session.delete(anOwnerToDelete);
-		
-		transaction.commit();
-	}
-	
-	/*
-	 * Car Database Methods
-	 */
 
 }

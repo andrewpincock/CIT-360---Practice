@@ -1,16 +1,12 @@
-package net.codyconder.hibernate.cardatabase;
+package net.codyconder.hibernate.working;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.Query;
 
 public class Model {
-	/* ****************************
-	 * Database Interaction Methods 
-	 * ****************************/
-
 	/*
 	 * Owner Database Methods
 	 */
@@ -23,7 +19,6 @@ public class Model {
 		session.save(newOwner);
 
 		transaction.commit();
-
 	}
 
 	public List<Owner> queryAllOwners() {
@@ -74,7 +69,7 @@ public class Model {
 
 		transaction.commit();
 	}
-	
+
 	/*
 	 * Car Database Methods
 	 */
