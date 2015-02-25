@@ -9,6 +9,7 @@ public class OwnerManagement {
 
 	Scanner userInput = new Scanner(System.in);
 	Model model = new Model();
+	
 	public OwnerManagement () {
 		
 	}
