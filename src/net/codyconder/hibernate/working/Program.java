@@ -28,6 +28,7 @@ public class Program {
 			 */
 			quitProgram = program.mainMenu();
 		}
+		System.exit(0);
 	}
 
 	/* ************

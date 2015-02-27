@@ -82,7 +82,7 @@ public class CarManagement {
 		while(carIterator.hasNext()) {
 			
 			Car element = carIterator.next();
-			System.out.printf("%-5s%-20s%-7s%-18s%-16s%-16s\n",element.getId(),element.getOwnerId().getFullName(),
+			System.out.printf("%-5s%-20s%-7s%-16s%-18s%-16s\n",element.getId(),element.getOwnerId().getFullName(),
 					element.getYear(),element.getMake(),element.getModel(),element.getColor());
 		}
 	}
