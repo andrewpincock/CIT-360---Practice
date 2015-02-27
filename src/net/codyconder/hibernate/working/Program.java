@@ -4,13 +4,6 @@ import java.util.Scanner;
 
 public class Program {
 
-	/*
-	 * Create a program object. This makes it available to all methods within
-	 * the class without having to instantiate it each time you need it.
-	 */
-	static Program program = new Program();
-	OwnerManagement ownerManagement = new OwnerManagement();
-	CarManagement carManagement = new CarManagement();
 	Scanner userInput = new Scanner(System.in);
 
 	// Program constructor
@@ -18,7 +11,9 @@ public class Program {
 	}
 
 	public static void main(String[] args) {
+		Program program = new Program();
 		boolean quitProgram = false;
+		
 		while (!quitProgram) {
 			/*
 			 * Control of the program will flow through the Main Menu and the
@@ -64,11 +59,11 @@ public class Program {
 			switch (selection) {
 			case 1:
 				// Open the Owner Menu
-				program.ownerMenu();
+				ownerMenu();
 				break;
 			case 2:
 				// Open the Car Menu
-				program.carMenu();
+				carMenu();
 				break;
 			case 3:
 				// Exit the program
@@ -119,24 +114,24 @@ public class Program {
 			switch (selection) {
 			case 1:
 				// Call the addOwner method, then return to the owner menu
-				ownerManagement.addOwner();
+				OwnerManagement.addOwner();
 				break;
 			case 2:
 				// Call the listOwners method, then return to the owner menu
-				ownerManagement.listOwners();
+				OwnerManagement.listOwners();
 				break;
 			case 3:
 				// Call the updateOwnerInformation method, then return to the
 				// owner menu
-				ownerManagement.updateOwnerInformation();
+				OwnerManagement.updateOwnerInformation();
 				break;
 			case 4:
 				// Call the listOwnerCars method, then return to the owner menu
-				ownerManagement.listOwnerCars();
+				OwnerManagement.listOwnerCars();
 				break;
 			case 5:
 				// Call the removeOwner method, then return to the owner menu
-				ownerManagement.removeOwner();
+				OwnerManagement.removeOwner();
 				break;
 			case 6:
 				// Return to the Main Menu
@@ -183,24 +178,24 @@ public class Program {
 			switch (selection) {
 			case 1:
 				// Call the addCar method then return to the car menu
-				carManagement.addCar();
+				CarManagement.addCar();
 				break;
 			case 2:
 				// Call the listAllCars method then return to the car menu
-				carManagement.listAllCars();
+				CarManagement.listAllCars();
 				break;
 			case 3:
 				// Call the updateCarInformation method then return to the car
 				// menu
-				carManagement.updateCarInformation();
+				CarManagement.updateCarInformation();
 				break;
 			case 4:
 				// Call the listOwnerCars method then return to the car menu
-				ownerManagement.listOwnerCars();
+				OwnerManagement.listOwnerCars();
 				break;
 			case 5:
 				// Call the removeCar method then return to the car menu
-				carManagement.removeCar();
+				CarManagement.removeCar();
 				break;
 			case 6:
 				// Return to the main menu

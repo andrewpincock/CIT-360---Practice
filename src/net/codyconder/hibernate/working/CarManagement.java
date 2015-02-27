@@ -8,9 +8,8 @@ import java.util.Set;
 
 public class CarManagement {
 	
-	Scanner userInput = new Scanner(System.in);
-	Model aModel = new Model();
-	OwnerManagement ownerManagement = new OwnerManagement();
+	static Scanner userInput = new Scanner(System.in);
+
 	
 	public CarManagement () {
 		
@@ -20,14 +19,14 @@ public class CarManagement {
 	 * Car management methods
 	 */
 	
-	void addCar () {
+	static void addCar () {
 		Integer selection = null;
 		String year;
 		String make;
 		String model;
 		String color;
 		
-		ownerManagement.listOwners();
+		OwnerManagement.listOwners();
 		
 		System.out.print("Enter the ID of the owner of the car: ");
 		
@@ -39,7 +38,7 @@ public class CarManagement {
 			return;
 		}
 		
-		Owner theOwner = aModel.queryOwnerById(selection);
+		Owner theOwner = Model.queryOwnerById(selection);
 		
 		if (theOwner == null) {
 			System.out.println();
@@ -64,13 +63,13 @@ public class CarManagement {
 		
 		System.out.println("Adding "+theOwner.getFullName()+"'s "+carToInsert.getMake()+" "
 				+carToInsert.getModel()+" to the database.");
-		aModel.insertCar(carToInsert);
+		Model.insertCar(carToInsert);
 		
 		System.out.println("Car successfully added to database!");
 	}
 	
-	void listAllCars () {
-		List<Car> carList = aModel.queryAllCars();
+	static void listAllCars () {
+		List<Car> carList = Model.queryAllCars();
 		
 		System.out.println();
 		System.out.println("Cars in Database");
@@ -87,7 +86,7 @@ public class CarManagement {
 		}
 	}
 	
-	void updateCarInformation () {
+	static void updateCarInformation () {
 		Integer selection = null;
 		Car carToUpdate;
 		
@@ -102,7 +101,7 @@ public class CarManagement {
 			return;
 		}
 		
-		carToUpdate = aModel.queryCarById(selection);
+		carToUpdate = Model.queryCarById(selection);
 		
 		if (carToUpdate == null) {
 			System.out.println();
@@ -138,12 +137,12 @@ public class CarManagement {
 		}
 		
 		System.out.println("Updating vehicle information.");
-		aModel.mergeCarInformation(carToUpdate);
+		Model.mergeCarInformation(carToUpdate);
 		
 		System.out.println("Information successfully updated! Returning to Car Menu.");
 	}
 	
-	void removeCar () {
+	static void removeCar () {
 		Integer selection = null;
 		String confirmation = null;
 		Car carToRemove;
@@ -161,7 +160,7 @@ public class CarManagement {
 			return;
 		}
 		
-		carToRemove = aModel.queryCarById(selection);
+		carToRemove = Model.queryCarById(selection);
 		
 		if (carToRemove == null) {
 			System.out.println();
@@ -177,7 +176,7 @@ public class CarManagement {
 		if (confirmation.equalsIgnoreCase("Y")) {
 			System.out.println("Removing "+carToRemove.getOwnerId().getFullName()+"'s "
 					+carToRemove.getMake()+" "+carToRemove.getModel());
-			aModel.deleteCarFromDatabase(carToRemove);
+			Model.deleteCarFromDatabase(carToRemove);
 			System.out.println("Car successfully deleted!");
 		} else if (confirmation.equalsIgnoreCase("N")) {
 			System.out.println(carToRemove.getOwnerId().getFullName()+"'s "

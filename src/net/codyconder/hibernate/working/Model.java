@@ -8,14 +8,10 @@ import org.hibernate.Transaction;
 
 public class Model {
 	
-	public Model () {
-		
-	}
-	
 	/*
 	 * Owner Database Methods
 	 */
-	void insertOwner(Owner ownerToInsert) {
+	static void insertOwner(Owner ownerToInsert) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -24,7 +20,7 @@ public class Model {
 		transaction.commit();
 	}
 
-	List<Owner> queryAllOwners() {
+	static List<Owner> queryAllOwners() {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -38,7 +34,7 @@ public class Model {
 		return ownersList;
 	}
 
-	Owner queryOwnerById(Integer anId) {
+	static Owner queryOwnerById(Integer anId) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -52,7 +48,7 @@ public class Model {
 		return singleOwner;
 	}
 
-	void mergeOwnerInformation(Owner anOwnerToUpdate) {
+	static void mergeOwnerInformation(Owner anOwnerToUpdate) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -64,7 +60,7 @@ public class Model {
 		transaction.commit();
 	}
 
-	void deleteOwnerFromDatabase(Owner anOwnerToDelete) {
+	static void deleteOwnerFromDatabase(Owner anOwnerToDelete) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -76,7 +72,7 @@ public class Model {
 	/*
 	 * Car Database Methods
 	 */
-	void insertCar(Car carToInsert) {
+	static void insertCar(Car carToInsert) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -85,7 +81,7 @@ public class Model {
 		transaction.commit();
 	}
 	
-	List<Car> queryAllCars() {
+	static List<Car> queryAllCars() {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		
@@ -98,7 +94,7 @@ public class Model {
 		return carsList;
 	}
 	
-	Car queryCarById(Integer anId) {
+	static Car queryCarById(Integer anId) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -112,7 +108,7 @@ public class Model {
 		return singleCar;
 	}
 	
-	void mergeCarInformation(Car aCarToUpdate) {
+	static void mergeCarInformation(Car aCarToUpdate) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 
@@ -124,7 +120,7 @@ public class Model {
 		transaction.commit();
 	}
 	
-	List<Car> queryCarsByOwner(Owner anOwner) {
+	static List<Car> queryCarsByOwner(Owner anOwner) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		
@@ -139,7 +135,7 @@ public class Model {
 		return carsList;
 	}
 	
-	void deleteCarFromDatabase(Car aCarToDelete) {
+	static void deleteCarFromDatabase(Car aCarToDelete) {
 		Session session = DatabaseConnection.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 

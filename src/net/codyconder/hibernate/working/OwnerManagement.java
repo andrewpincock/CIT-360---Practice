@@ -7,12 +7,7 @@ import java.util.Scanner;
 
 public class OwnerManagement {
 
-	Scanner userInput = new Scanner(System.in);
-	Model model = new Model();
-	
-	public OwnerManagement () {
-		
-	}
+	static Scanner userInput = new Scanner(System.in);
 	
 	/*
 	 * Owner management methods
@@ -23,7 +18,7 @@ public class OwnerManagement {
 	 * This method gathers the information for a new owner object
 	 * and then passes it to the insertOwner method for processing.
 	 */
-	void addOwner() {
+	static void addOwner() {
 		String firstName;
 		String lastName;
 		String gender;
@@ -38,7 +33,7 @@ public class OwnerManagement {
 		
 		System.out.println("Adding "+firstName+" "+lastName+" to the database.");
 		Owner ownerToInsert = new Owner(firstName,lastName,gender);
-		model.insertOwner(ownerToInsert);
+		Model.insertOwner(ownerToInsert);
 		
 		System.out.println(firstName+" "+lastName+" successfully added!");
 		
@@ -50,8 +45,8 @@ public class OwnerManagement {
 	 * owner information from the database.
 	 * A table is then printed and displayed to the user.
 	 */
-	void listOwners() {
-		List<Owner> ownerList = model.queryAllOwners();
+	static void listOwners() {
+		List<Owner> ownerList = Model.queryAllOwners();
 		
 		System.out.println();
 		System.out.println("Owners in Database");
@@ -80,7 +75,7 @@ public class OwnerManagement {
 	 * to update the owner information and the object is passed
 	 * to the mergeOwnerInformation method for processing. 
 	 */
-	void updateOwnerInformation() {
+	static void updateOwnerInformation() {
 		Integer selection = null;
 		Owner ownerToUpdate;
 		
@@ -95,7 +90,7 @@ public class OwnerManagement {
 			return;
 		}
 		
-		ownerToUpdate = model.queryOwnerById(selection);
+		ownerToUpdate = Model.queryOwnerById(selection);
 		
 		if (ownerToUpdate == null) {
 			System.out.println();
@@ -125,7 +120,7 @@ public class OwnerManagement {
 		}
 		
 		System.out.println("Updating information for "+ownerToUpdate.getFullName());
-		model.mergeOwnerInformation(ownerToUpdate);
+		Model.mergeOwnerInformation(ownerToUpdate);
 		
 		System.out.println("Information successfully updated! Returning to Owner Menu.");
 		
@@ -137,7 +132,7 @@ public class OwnerManagement {
 	 * The user is then prompted to select one of the owners,
 	 * and the method lists all cars owned by that owner.
 	 */
-	void listOwnerCars() {
+	static void listOwnerCars() {
 		Integer selection = null;
 		Owner theOwner;
 		
@@ -152,10 +147,10 @@ public class OwnerManagement {
 			return;
 		}
 		
-		theOwner = model.queryOwnerById(selection);
+		theOwner = Model.queryOwnerById(selection);
 		System.out.println("Retrieving "+theOwner.getFullName()+"'s cars.");
 		
-		List<Car> listOfCars = model.queryCarsByOwner(theOwner);
+		List<Car> listOfCars = Model.queryCarsByOwner(theOwner);
 		
 		System.out.println();
 		System.out.println("Cars in Database");
@@ -179,8 +174,10 @@ public class OwnerManagement {
 	 * This method removes an owner from the database.
 	 * We start by listing the owners in the database
 	 * and prompting the user to select one of the owners.
+	 * The user is asked for confirmation before deleting
+	 * an owner, as the action can't be undone.
 	 */
-	void removeOwner() {
+	static void removeOwner() {
 		Integer selection = null;
 		String confirmation = null;
 		Owner ownerToRemove;
@@ -198,7 +195,7 @@ public class OwnerManagement {
 			return;
 		}
 		
-		ownerToRemove = model.queryOwnerById(selection);
+		ownerToRemove = Model.queryOwnerById(selection);
 		
 		if (ownerToRemove == null) {
 			System.out.println();
@@ -213,7 +210,7 @@ public class OwnerManagement {
 		
 		if (confirmation.equalsIgnoreCase("Y")) {
 			System.out.println("Removing owner "+ownerToRemove.getFullName());
-			model.deleteOwnerFromDatabase(ownerToRemove);
+			Model.deleteOwnerFromDatabase(ownerToRemove);
 			System.out.println("Owner successfully deleted!");
 		} else if (confirmation.equalsIgnoreCase("N")) {
 			System.out.println(ownerToRemove.getFullName()+" not removed from database.");
