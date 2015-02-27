@@ -59,6 +59,7 @@ public class DatabaseConnection
 		 */
 
 		config.addAnnotatedClass(Car.class);
+		config.addAnnotatedClass(Owner.class);
 
 		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().
 				applySettings(config.getProperties()).buildServiceRegistry();
