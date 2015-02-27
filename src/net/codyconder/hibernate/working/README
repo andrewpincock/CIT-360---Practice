@@ -1,0 +1,17 @@
+This is a simple program which will insert, update, read, and delete "Owners" and "Cars" in
+a simple MySQL database.
+
+The application assumes you have run the cars_db_setup.sql script to create the database in MySQL.
+
+You will need to update the connection credentials found in the DatabaseConnection.java file to
+match your installation.
+
+This program requires the Hibernate Java library, along with a few other dependencies. These can
+all be found in the lib folder at the root of this repository.
+
+You are welcome to use this code for research purposes and as a model for your own learning. Keep
+in mind that only minimal error checking is performed. This code is NOT perfect, and probably
+never will be! Don't treat it as such!
+
+Thanks for taking a look!
+~Cody
