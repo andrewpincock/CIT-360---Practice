@@ -1,6 +1,7 @@
 package net.codyconder.clientserver;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -24,10 +25,16 @@ public class HappyClient {
 		// -------------------------------------------------------------------------------------- //
 		
 		// Create an owner
-		OwnerBean anOwner = new OwnerBean(1, "Cody", "Conder", "male");
+		OwnerBean anOwner = new OwnerBean(1, "Kymberly", "Oliver", "female");
 		
 		// Open our connection with the server
-		Socket toServer = new Socket("localhost", 9889);
+		Socket toServer = null;
+		try {
+			toServer = new Socket("localhost", 9889);
+		} catch (ConnectException e) {
+			System.out.println("Exiting: The server refused the connection. Are you sure it's running?");
+			System.exit(1);
+		}
 		
 		// Set up our JSON streams so we can send and receive data
 		JSONInputStream inFromServer = new JSONInputStream(toServer.getInputStream());
