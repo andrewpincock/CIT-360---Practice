@@ -1,7 +1,6 @@
 package net.codyconder.threads;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
@@ -11,36 +10,10 @@ import org.quickconnectfamily.json.JSONException;
 import org.quickconnectfamily.json.JSONInputStream;
 import org.quickconnectfamily.json.JSONOutputStream;
 
-public class RunnableServer {
-
-	private static int port = 9889;
-	
-	public static void main(String[] args) {
-		ServerSocket listeningSocket;
-		try {
-			listeningSocket = new ServerSocket(port);
-			Socket clientSocket;
-			
-			while(true) {
-				clientSocket = listeningSocket.accept();
-				SocketServer conn = new SocketServer(clientSocket);
-				
-				Thread t = new Thread(conn);
-				t.start();
-			}
-		} catch (IOException e){
-			System.out.println("IOException on socket listen: " + e);
-		}
-
-	}
-
-}
-
-
-class SocketServer implements Runnable {
+class RunnableSocketServer implements Runnable {
 	private Socket clientSocket;
 	
-	SocketServer(Socket clientSocket) {
+	RunnableSocketServer(Socket clientSocket) {
 		this.clientSocket = clientSocket;
 	}
 	
