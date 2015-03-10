@@ -1,4 +1,4 @@
-package net.codyconder.threads;
+package net.codyconder.threads.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
