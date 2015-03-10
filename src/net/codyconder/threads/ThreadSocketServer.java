@@ -26,8 +26,7 @@ class ThreadSocketServer extends Thread {
 
 			@SuppressWarnings("unchecked")
 			// Read the OwnerBean into a HashMap
-			HashMap<String, ?> parsedJSONMap = (HashMap<String, ?>) inFromClient
-					.readObject();
+			HashMap<String, ?> parsedJSONMap = (HashMap<String, ?>) inFromClient.readObject();
 			System.out.println("Object read");
 
 			// Create a new OwnerBean
@@ -39,27 +38,23 @@ class ThreadSocketServer extends Thread {
 
 			// Print out the owner details on our side
 			System.out.println("The owner is " + theOwner.getFirstName() + " "
-					+ theOwner.getLastName() + ", a " + theOwner.getGender()
-					+ ".");
+					+ theOwner.getLastName() + ", a " + theOwner.getGender() + ".");
 		} catch (JSONException e) {
 			// This catches the exception thrown if we receive an invalid JSON
 			// string or a null object.
-			System.out
-					.println("Server: An invalid JSON string was received. Resetting connection.");
+			System.out.println("Server: An invalid JSON string was received. Resetting connection.");
 			// At this point, we'd send an error back to the client... however,
 			// it has likely crashed.
 		} catch (ClassCastException e) {
 			// This takes care of the issue if we receive something that's not
 			// an OwnerBean.
-			System.out
-					.println("Server: An invalid object was received. Resetting connection.");
+			System.out.println("Server: An invalid object was received. Resetting connection.");
 			// At this point, we'd send an error back to the client... however,
 			// it has likely crashed.
 		} catch (NullPointerException e) {
 			// This appears to happen when we send something other than an
 			// OwnerBean
-			System.out
-					.println("Server: The server is only configured to handle OwnerBeans. Resetting connection.");
+			System.out.println("Server: The server is only configured to handle OwnerBeans. Resetting connection.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class RunnableMain {
+public class RunnableSocketServerMain {
 
 	private static int port = 9889;
 
@@ -15,14 +15,20 @@ public class RunnableMain {
 			Socket clientSocket;
 
 			while (true) {
-				clientSocket = listeningSocket.accept();
-				RunnableSocketServer conn = new RunnableSocketServer(clientSocket);
+				try {
+					clientSocket = listeningSocket.accept();
+					RunnableSocketServer conn = new RunnableSocketServer(clientSocket);
 
-				Thread t = new Thread(conn);
-				t.start();
+					Thread t = new Thread(conn);
+					t.start();
+				} catch (IOException e) {
+					System.out.println("IOException on socket listen: " + e);
+					e.printStackTrace();
+				}
 			}
 		} catch (IOException e) {
 			System.out.println("IOException on socket listen: " + e);
+			e.printStackTrace();
 		}
 
 	}
